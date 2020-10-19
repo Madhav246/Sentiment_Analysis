@@ -1,5 +1,5 @@
 import string
-
+from collections import Counter
 text_file = open("read.txt", "wt")
 print("Enter string to write to text file.")
 text_input = input().lower()
@@ -32,3 +32,16 @@ for word in tokenized_words:
     if word not in stop_words:
         final_words.append(word)
 print(final_words)
+
+emotion_list = []
+with open('emotions.txt', 'r') as file:
+    for line in file:
+        clear_line = line.replace("\n", '').replace(",", '').replace("'", '').strip()
+        word, emotion = clear_line.split(':')
+
+        if word in final_words:
+            emotion_list.append(emotion)
+
+print(emotion_list)
+w = Counter(emotion_list)
+print(w)
