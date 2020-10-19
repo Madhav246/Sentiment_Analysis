@@ -1,5 +1,7 @@
 import string
 from collections import Counter
+import matplotlib.pyplot as plt
+
 text_file = open("read.txt", "wt")
 print("Enter string to write to text file.")
 text_input = input().lower()
@@ -31,7 +33,8 @@ final_words = []
 for word in tokenized_words:
     if word not in stop_words:
         final_words.append(word)
-print(final_words)
+
+# counting emotions
 
 emotion_list = []
 with open('emotions.txt', 'r') as file:
@@ -45,3 +48,11 @@ with open('emotions.txt', 'r') as file:
 print(emotion_list)
 w = Counter(emotion_list)
 print(w)
+
+# Graphical Representation of data
+
+fig, ax1 = plt.subplots()
+ax1.bar(w.keys(), w.values())
+fig.autofmt_xdate()
+plt.savefig('graph.png')
+plt.show()
